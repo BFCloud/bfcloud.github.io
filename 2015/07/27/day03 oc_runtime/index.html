@@ -6,27 +6,27 @@
   <title>White Swifter</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Runtime 01 - Sunday(Testing)测试环境：OS X EI Capitan beta4(15A225f) &amp;amp; Xcode7 beta4   
-Runtime开源代码
 先来看一个例子：
 1[receiver message]
-reciver是一个类的实例对象，它要发送消息？不 ，它是消息的接受者，意思是向receiver发送message这个消息，这句话通过编译器会转变">
+reciver是一个类的实例对象，它要发送消息？不 ，它是消息的接受者，意思是向receiver发送message这个消息，这句话通过编译器会转变成以下内容：
+1objc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="White Swifter">
 <meta property="og:url" content="http://yoursite.com/2015/07/27/day03 oc_runtime/index.html">
 <meta property="og:site_name" content="White Swifter">
 <meta property="og:description" content="Runtime 01 - Sunday(Testing)测试环境：OS X EI Capitan beta4(15A225f) &amp;amp; Xcode7 beta4   
-Runtime开源代码
 先来看一个例子：
 1[receiver message]
-reciver是一个类的实例对象，它要发送消息？不 ，它是消息的接受者，意思是向receiver发送message这个消息，这句话通过编译器会转变">
-<meta property="og:updated_time" content="2015-07-27T06:55:18.000Z">
+reciver是一个类的实例对象，它要发送消息？不 ，它是消息的接受者，意思是向receiver发送message这个消息，这句话通过编译器会转变成以下内容：
+1objc">
+<meta property="og:updated_time" content="2015-07-27T07:12:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="White Swifter">
 <meta name="twitter:description" content="Runtime 01 - Sunday(Testing)测试环境：OS X EI Capitan beta4(15A225f) &amp;amp; Xcode7 beta4   
-Runtime开源代码
 先来看一个例子：
 1[receiver message]
-reciver是一个类的实例对象，它要发送消息？不 ，它是消息的接受者，意思是向receiver发送message这个消息，这句话通过编译器会转变">
+reciver是一个类的实例对象，它要发送消息？不 ，它是消息的接受者，意思是向receiver发送message这个消息，这句话通过编译器会转变成以下内容：
+1objc">
   
     <link rel="alternative" href="/atom.xml" title="White Swifter" type="application/atom+xml">
   
@@ -182,7 +182,7 @@ reciver是一个类的实例对象，它要发送消息？不 ，它是消息的
   
     <div class="article-meta">
       <a href="/2015/07/27/day03 oc_runtime/" class="article-date">
-  	<time datetime="2015-07-27T06:55:18.000Z" itemprop="datePublished">2015-07-27</time>
+  	<time datetime="2015-07-27T07:12:05.000Z" itemprop="datePublished">2015-07-27</time>
 </a>
     </div>
   
@@ -194,13 +194,21 @@ reciver是一个类的实例对象，它要发送消息？不 ，它是消息的
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="Runtime_01_-_Sunday(Testing)">Runtime 01 - Sunday(Testing)</h1><p>测试环境：<code>OS X EI Capitan beta4(15A225f)</code> &amp; <code>Xcode7 beta4</code>   </p>
-<p><a href="http://opensource.apple.com/tarballs/objc4/" target="_blank" rel="external">Runtime开源代码</a></p>
 <p>先来看一个例子：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[receiver message]</span><br></pre></td></tr></table></figure>
 <p><code>reciver</code>是一个类的实例对象，它要发送消息？不 ，它是消息的接受者，意思是<code>向receiver发送message这个消息</code>，<br>这句话通过编译器会转变成以下内容：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">objc_msgSend(receiver, @selector(message:))</span><br></pre></td></tr></table></figure>
-<p><code>objc_msgSend</code>就是C函数(位于<code>objc/Message.h</code>)，它的声明是</p>
+<p><code>objc_msgSend</code>就是一个C函数，它的声明是</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">id <span class="title">objc_msgSend</span><span class="params">(id self, SEL op, ...)</span></span></span><br></pre></td></tr></table></figure>
+<p>我们可以这样向它传参数</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSString *str1 = @&#34;Hello&#34;;&#10;NSString *str2 = @&#34;runtime&#34;;&#10;[str1 stringByAppendingString: str2];&#10;//&#31561;&#20215;&#20110;&#10;objc_msgSend(str1, @selector(stringByAppendingString:), str2);</span><br></pre></td></tr></table></figure>
+<h4 id="对于objc_msgSend这个函数，我们需要了解：">对于<code>objc_msgSend</code>这个函数，我们需要了解：</h4><ol>
+<li><code>str1</code>,<code>str2</code>是对象，那么类在OC中式如何定义的？</li>
+<li>对象发送消息的过程是怎样的？</li>
+</ol>
+<h4 id="1-类的定义">1.类的定义</h4><p>首先下载<a href="http://opensource.apple.com/tarballs/objc4/" target="_blank" rel="external">Runtime开源代码</a>，打开<code>objc.xcodeproj</code>工程，进入<code>objc &gt; Public Headers &gt; objc.h</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">if</span> !OBJC_TYPES_DEFINED</span></span><br><span class="line"><span class="comment">/// An opaque type that represents an Objective-C class.</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> objc_class *Class;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// Represents an instance of a class.</span></span><br><span class="line"><span class="keyword">struct</span> objc_object &#123;</span><br><span class="line">    Class isa  OBJC_ISA_AVAILABILITY;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// A pointer to an instance of a class.</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> objc_object *id;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/// An opaque type that represents a method selector.</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> objc_selector *SEL;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
