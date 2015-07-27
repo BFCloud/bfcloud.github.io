@@ -19,7 +19,8 @@ reciver是一个类的实例对象，它要发送消息？不 ，它是消息的
 1[receiver message]
 reciver是一个类的实例对象，它要发送消息？不 ，它是消息的接受者，意思是向receiver发送message这个消息，这句话通过编译器会转变成以下内容：
 1objc">
-<meta property="og:updated_time" content="2015-07-27T07:12:05.000Z">
+<meta property="og:image" content="http://yoursite.com/images/20150727/objc_object.png">
+<meta property="og:updated_time" content="2015-07-27T07:43:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="White Swifter">
 <meta name="twitter:description" content="Runtime 01 - Sunday(Testing)测试环境：OS X EI Capitan beta4(15A225f) &amp;amp; Xcode7 beta4   
@@ -182,7 +183,7 @@ reciver是一个类的实例对象，它要发送消息？不 ，它是消息的
   
     <div class="article-meta">
       <a href="/2015/07/27/day03 oc_runtime/" class="article-date">
-  	<time datetime="2015-07-27T07:12:05.000Z" itemprop="datePublished">2015-07-27</time>
+  	<time datetime="2015-07-27T07:43:54.000Z" itemprop="datePublished">2015-07-27</time>
 </a>
     </div>
   
@@ -208,6 +209,7 @@ reciver是一个类的实例对象，它要发送消息？不 ，它是消息的
 </ol>
 <h4 id="1-类的定义">1.类的定义</h4><p>首先下载<a href="http://opensource.apple.com/tarballs/objc4/" target="_blank" rel="external">Runtime开源代码</a>，打开<code>objc.xcodeproj</code>工程，进入<code>objc &gt; Public Headers &gt; objc.h</code></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">if</span> !OBJC_TYPES_DEFINED</span></span><br><span class="line"><span class="comment">/// An opaque type that represents an Objective-C class.</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> objc_class *Class;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// Represents an instance of a class.</span></span><br><span class="line"><span class="keyword">struct</span> objc_object &#123;</span><br><span class="line">    Class isa  OBJC_ISA_AVAILABILITY;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// A pointer to an instance of a class.</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> objc_object *id;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/// An opaque type that represents a method selector.</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> objc_selector *SEL;</span><br></pre></td></tr></table></figure>
+<p>首先我们可以看到<code>id</code>是一个<code>objc_object</code>的指针，然后<br><img src="/images/20150727/objc_object.png" alt="objc_object"></p>
 
       
     </div>
