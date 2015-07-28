@@ -85,6 +85,10 @@
 				        
 							<li><a href="/archives">所有文章</a></li>
 				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+							<li><a href="/Swift">Swift</a></li>
+				        
 						</ul>
 					</nav>
 					<nav class="header-nav">
@@ -146,6 +150,10 @@
 		        
 					<li><a href="/archives">所有文章</a></li>
 		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+					<li><a href="/Swift">Swift</a></li>
+		        
 		        <div class="clearfix"></div>
 				</ul>
 			</nav>
@@ -166,6 +174,60 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-day02" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/28/day02/" class="article-date">
+  	<time datetime="2015-07-28T03:58:20.000Z" itemprop="datePublished">2015-07-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>tags: </p>
+<ul>
+<li>Swift<br>categories:</li>
+<li>Swift</li>
+</ul>
+<h1 id="闭包（Closures）">闭包（Closures）</h1><h4 id="三种形式">三种形式</h4><pre><code>全局函数（定义在类外的函数）：有名字，不能捕获任何值
+嵌套函数：有名字，可以捕获其封闭函数域内值
+闭包表达式：捕获上下文中的常量或变量
+</code></pre><h4 id="语法优化">语法优化</h4><pre><code>-<span class="ruby"> 利用上下文推断参数和返回值类型
+</span>-<span class="ruby"> 单表达式闭包隐式返回（不用谢<span class="keyword">return</span>）
+</span>-<span class="ruby"> 尾随（<span class="constant">Trailing</span>）闭包</span>
+</code></pre><h4 id="尾随闭包">尾随闭包</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">someMethod</span><span class="params">(closure: <span class="params">()</span></span></span> -&gt; <span class="type">Int</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//函数体</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//不使用尾随闭包</span></span><br><span class="line">someMethod(&#123;</span><br><span class="line">	<span class="comment">//闭包主体</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用尾随闭包</span></span><br><span class="line">someMethod()&#123;</span><br><span class="line">	<span class="comment">//闭包主体</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//函数只有一个参数,省略()</span></span><br><span class="line">someMethod&#123;</span><br><span class="line">	<span class="comment">//闭包主体</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="捕获值得内存管理">捕获值得内存管理</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">method01</span><span class="params">(value01: Int)</span></span> -&gt; () -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">	<span class="keyword">var</span> <span class="built_in">count</span> = <span class="number">2</span></span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">method02</span><span class="params">()</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">		<span class="built_in">count</span> += value01</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">count</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> method02</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> otherMethod = method01(<span class="number">2</span>)</span><br><span class="line">otherMethod()	<span class="comment">//4</span></span><br><span class="line">otherMethod()	<span class="comment">//6</span></span><br><span class="line">otherMethod()	<span class="comment">//8</span></span><br></pre></td></tr></table></figure>
+<p><code>method02</code>捕获了<code>count</code>以及<code>value01</code>，甚至在调用完<code>otherMethod()</code>之后依然可以增加捕获的<code>count</code>变量，为什么呢？  </p>
+<p>第一，<code>otherMethod</code>保持着对这个方法引用（引用计数没有变为0）<br>第二，<code>method02</code>捕获了<code>count</code>以及<code>value01</code>，赋给了<code>otherMethod</code>，前者是引用，后者是副本（因为没有改变<code>value01</code>的值），即使<code>method01</code>调用完成，<code>count</code>变量被<code>otherMethod</code>所引用，继续保持在内存中。（PS: 变量作为引用还是拷贝值由Swift决定，<code>count</code>变量的内存管理也由Swift处理，当其不被<code>method02</code>使用时，就会被清除）</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-day03 oc_runtime" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -198,55 +260,6 @@
 <h4 id="1-类的定义">1.类的定义</h4><p>首先下载<a href="http://opensource.apple.com/tarballs/objc4/" target="_blank" rel="external">Runtime开源代码</a>，打开<code>objc.xcodeproj</code>工程，进入<code>objc &gt; Public Headers &gt; objc.h</code></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">if</span> !OBJC_TYPES_DEFINED</span></span><br><span class="line"><span class="comment">/// An opaque type that represents an Objective-C class.</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> objc_class *Class;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// Represents an instance of a class.</span></span><br><span class="line"><span class="keyword">struct</span> objc_object &#123;</span><br><span class="line">    Class isa  OBJC_ISA_AVAILABILITY;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// A pointer to an instance of a class.</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> objc_object *id;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/// An opaque type that represents a method selector.</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> objc_selector *SEL;</span><br></pre></td></tr></table></figure>
 <p>首先我们可以看到<code>id</code>是一个<code>objc_object</code>的指针，然后<br><img src="/images/20150727/objc_object.png" alt="objc_object"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-day02" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/26/day02/" class="article-date">
-  	<time datetime="2015-07-26T08:36:20.000Z" itemprop="datePublished">2015-07-26</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="闭包（Closures）">闭包（Closures）</h1><h4 id="三种形式">三种形式</h4><pre><code>全局函数（定义在类外的函数）：有名字，不能捕获任何值
-嵌套函数：有名字，可以捕获其封闭函数域内值
-闭包表达式：捕获上下文中的常量或变量
-</code></pre><h4 id="语法优化">语法优化</h4><pre><code>-<span class="ruby"> 利用上下文推断参数和返回值类型
-</span>-<span class="ruby"> 单表达式闭包隐式返回（不用谢<span class="keyword">return</span>）
-</span>-<span class="ruby"> 尾随（<span class="constant">Trailing</span>）闭包</span>
-</code></pre><h4 id="尾随闭包">尾随闭包</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">someMethod</span><span class="params">(closure: <span class="params">()</span></span></span> -&gt; <span class="type">Int</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//函数体</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//不使用尾随闭包</span></span><br><span class="line">someMethod(&#123;</span><br><span class="line">	<span class="comment">//闭包主体</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用尾随闭包</span></span><br><span class="line">someMethod()&#123;</span><br><span class="line">	<span class="comment">//闭包主体</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//函数只有一个参数,省略()</span></span><br><span class="line">someMethod&#123;</span><br><span class="line">	<span class="comment">//闭包主体</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="捕获值得内存管理">捕获值得内存管理</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">method01</span><span class="params">(value01: Int)</span></span> -&gt; () -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">	<span class="keyword">var</span> <span class="built_in">count</span> = <span class="number">2</span></span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">method02</span><span class="params">()</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">		<span class="built_in">count</span> += value01</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">count</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> method02</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> otherMethod = method01(<span class="number">2</span>)</span><br><span class="line">otherMethod()	<span class="comment">//4</span></span><br><span class="line">otherMethod()	<span class="comment">//6</span></span><br><span class="line">otherMethod()	<span class="comment">//8</span></span><br></pre></td></tr></table></figure>
-<p><code>method02</code>捕获了<code>count</code>以及<code>value01</code>，甚至在调用完<code>otherMethod()</code>之后依然可以增加捕获的<code>count</code>变量，为什么呢？  </p>
-<p>第一，<code>otherMethod</code>保持着对这个方法引用（引用计数没有变为0）<br>第二，<code>method02</code>捕获了<code>count</code>以及<code>value01</code>，赋给了<code>otherMethod</code>，前者是引用，后者是副本（因为没有改变<code>value01</code>的值），即使<code>method01</code>调用完成，<code>count</code>变量被<code>otherMethod</code>所引用，继续保持在内存中。（PS: 变量作为引用还是拷贝值由Swift决定，<code>count</code>变量的内存管理也由Swift处理，当其不被<code>method02</code>使用时，就会被清除）</p>
 
       
     </div>
