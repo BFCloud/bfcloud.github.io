@@ -5,49 +5,34 @@
   
   <title>闭包（Closures） | White Swifter</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="tags: 
-
-Swiftcategories:
-Swift
-
-闭包（Closures）三种形式全局函数（定义在类外的函数）：有名字，不能捕获任何值
+  <meta name="description" content="闭包（Closures）三种形式全局函数（定义在类外的函数）：有名字，不能捕获任何值
 嵌套函数：有名字，可以捕获其封闭函数域内值
 闭包表达式：捕获上下文中的常量或变量
 语法优化- 利用上下文推断参数和返回值类型
 - 单表达式闭包隐式返回（不用谢return）
 - 尾随（Trailing）闭包
-尾随闭包12345678910111213">
+尾随闭包12345678910111213141516171819func someMethod(clos">
 <meta property="og:type" content="article">
 <meta property="og:title" content="闭包（Closures）">
 <meta property="og:url" content="http://yoursite.com/2015/07/28/day02/index.html">
 <meta property="og:site_name" content="White Swifter">
-<meta property="og:description" content="tags: 
-
-Swiftcategories:
-Swift
-
-闭包（Closures）三种形式全局函数（定义在类外的函数）：有名字，不能捕获任何值
+<meta property="og:description" content="闭包（Closures）三种形式全局函数（定义在类外的函数）：有名字，不能捕获任何值
 嵌套函数：有名字，可以捕获其封闭函数域内值
 闭包表达式：捕获上下文中的常量或变量
 语法优化- 利用上下文推断参数和返回值类型
 - 单表达式闭包隐式返回（不用谢return）
 - 尾随（Trailing）闭包
-尾随闭包12345678910111213">
-<meta property="og:updated_time" content="2015-07-28T04:04:46.000Z">
+尾随闭包12345678910111213141516171819func someMethod(clos">
+<meta property="og:updated_time" content="2015-07-28T04:10:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="闭包（Closures）">
-<meta name="twitter:description" content="tags: 
-
-Swiftcategories:
-Swift
-
-闭包（Closures）三种形式全局函数（定义在类外的函数）：有名字，不能捕获任何值
+<meta name="twitter:description" content="闭包（Closures）三种形式全局函数（定义在类外的函数）：有名字，不能捕获任何值
 嵌套函数：有名字，可以捕获其封闭函数域内值
 闭包表达式：捕获上下文中的常量或变量
 语法优化- 利用上下文推断参数和返回值类型
 - 单表达式闭包隐式返回（不用谢return）
 - 尾随（Trailing）闭包
-尾随闭包12345678910111213">
+尾随闭包12345678910111213141516171819func someMethod(clos">
   
     <link rel="alternative" href="/atom.xml" title="White Swifter" type="application/atom+xml">
   
@@ -143,7 +128,7 @@ Swift
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/objective-c/" style="font-size: 10px;">objective-c</a> <a href="/tags/runtime/" style="font-size: 10px;">runtime</a>
+						<a href="/tags/Swift/" style="font-size: 10px;">Swift</a> <a href="/tags/objective-c/" style="font-size: 10px;">objective-c</a> <a href="/tags/runtime/" style="font-size: 10px;">runtime</a>
 					</div>
 				</section>
 				
@@ -211,7 +196,7 @@ Swift
   
     <div class="article-meta">
       <a href="/2015/07/28/day02/" class="article-date">
-  	<time datetime="2015-07-28T04:04:46.000Z" itemprop="datePublished">2015-07-28</time>
+  	<time datetime="2015-07-28T04:10:35.000Z" itemprop="datePublished">2015-07-28</time>
 </a>
     </div>
   
@@ -232,7 +217,15 @@ Swift
       
       <div class="article-info article-info-post">
         
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift/">Swift</a></li></ul>
+	</div>
+
         
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Swift/">Swift</a>
+	</div>
+
 
         <div class="clearfix"></div>
       </div>
@@ -240,12 +233,7 @@ Swift
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>tags: </p>
-<ul>
-<li>Swift<br>categories:</li>
-<li>Swift</li>
-</ul>
-<h1 id="闭包（Closures）">闭包（Closures）</h1><h4 id="三种形式">三种形式</h4><pre><code>全局函数（定义在类外的函数）：有名字，不能捕获任何值
+        <h1 id="闭包（Closures）">闭包（Closures）</h1><h4 id="三种形式">三种形式</h4><pre><code>全局函数（定义在类外的函数）：有名字，不能捕获任何值
 嵌套函数：有名字，可以捕获其封闭函数域内值
 闭包表达式：捕获上下文中的常量或变量
 </code></pre><h4 id="语法优化">语法优化</h4><pre><code>-<span class="ruby"> 利用上下文推断参数和返回值类型
@@ -264,18 +252,9 @@ Swift
     
 <nav id="article-nav">
   
-    <a href="/2015/07/28/day03 oc_runtime/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Runtime 01 - Sunday
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/07/26/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
+    <a href="/2015/07/28/day03 oc_runtime/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Runtime 01 - Sunday</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
